@@ -10,6 +10,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Commit ID
+        id: commit_id
+        run: echo "::set-output name=commit_id::commit-$(git rev-parse --short HEAD)"
+      - run: echo "${{ steps.commit_id.outputs.commit_id }}"
       - uses: actions/upload-artifact@v3
         continue-on-error: true
         with:
@@ -17,11 +21,12 @@ jobs:
           path: |
             A/C-1.txt
             B/C-2.txt
-      - uses: svenstaro/upload-release-action@v2
+      - uses: ncipollo/release-action@v1
         continue-on-error: true
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: "*/C-*.txt"
-          tag: ${{ github.sha }}
-          overwrite: true
-          file_glob: true
+          allowUpdates: true
+          artifacts: "A/C-1.txt,B/C-2.txt"
+          body: "测试。"
+          name: "测试"
+          tag: ${{ steps.commit_id.outputs.commit_id }}
+          token: ${{ secrets.GITHUB_TOKEN }}
