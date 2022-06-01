@@ -28,6 +28,7 @@ jobs:
           allowUpdates: true
           artifacts: "A/C-1.txt,B/C-2.txt"
           bodyFile: Readme.md
+          commit: dist
           name: ${{ steps.commit.outputs.commit_message }}
-          tag: ${{ steps.commit.outputs.commit_id }}
+          tag: action-${{ github.run_number }}
           token: ${{ secrets.GITHUB_TOKEN }}
