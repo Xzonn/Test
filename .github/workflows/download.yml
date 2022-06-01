@@ -11,15 +11,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/upload-artifact@v3
+        continue-on-error: true
         with:
           name: Patches
-          path: "1.txt 2.txt"
-      - name: Upload Github Assets
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: svenstaro/upload-release-action@v2
+          path: |
+            A/C-1.txt
+            B/C-2.txt
+      - uses: svenstaro/upload-release-action@v2
+        continue-on-error: true
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: "1.txt 2.txt"
-          tag: ${{ github.ref }}
+          file: "*/C-*.txt"
+          tag: ${{ github.sha }}
           overwrite: true
           file_glob: true
