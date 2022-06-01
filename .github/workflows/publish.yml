@@ -1,0 +1,15 @@
+name: Publish
+
+on:
+  workflow_call:
+
+runs-on: ubuntu-latest
+steps:
+  - uses: actions/download-artifact@v3
+    with:
+      name: html
+      path: html
+  - name: Upload
+    run: |
+      ls
+      ls html

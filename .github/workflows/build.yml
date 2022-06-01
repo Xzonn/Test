@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  workflow_call:
+
+runs-on: ubuntu-latest
+steps:
+  - uses: actions/checkout@v3
+    with:
+      ref: master
+  - uses: ruby/setup-ruby@v1
+    with:
+      ruby-version: 2.7
+      bundler-cache: true
+  - name: Build Site
+    run: |
+      bundle exec jekyll build --trace --profile
+    env:
+      JEKYLL_ENV: aliyun
+  - uses: actions/upload-artifact@v3
+    with:
+      name: html
+      path: _site
