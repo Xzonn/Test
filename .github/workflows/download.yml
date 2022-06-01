@@ -10,10 +10,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Commit ID
-        id: commit_id
-        run: echo "::set-output name=commit_id::commit-$(git rev-parse --short HEAD)"
-      - run: echo "${{ steps.commit_id.outputs.commit_id }}"
+      - name: Commit Information
+        id: commit
+        run: |
+          echo "::set-output name=commit_id::commit-$(git rev-parse --short HEAD)"
+          echo "::set-output name=commit_message::$(git log -1 --pretty=%B)"
       - uses: actions/upload-artifact@v3
         continue-on-error: true
         with:
@@ -26,7 +27,7 @@ jobs:
         with:
           allowUpdates: true
           artifacts: "A/C-1.txt,B/C-2.txt"
-          body: "测试。"
-          name: "测试"
-          tag: ${{ steps.commit_id.outputs.commit_id }}
+          bodyFile: Readme.md
+          name: ${{ steps.commit.outputs.commit_message }}
+          tag: ${{ steps.commit.outputs.commit_id }}
           token: ${{ secrets.GITHUB_TOKEN }}
