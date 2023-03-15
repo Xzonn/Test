@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    uses: Xzonn/Test/.github/workflows/build.yml@master
+    uses: ./.github/workflows/build.yml@master
   
   publish:
-    uses: Xzonn/Test/.github/workflows/publish.yml@master
+    uses: ./.github/workflows/publish.yml@master
