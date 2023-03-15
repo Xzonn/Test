@@ -1,0 +1,20 @@
+name: Test branch
+
+on:
+  push:
+    branches: 
+      - test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          git clone --depth=1 --branch=master --single-branch "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" master
+          pushd master
+          echo $RANDOM >> $RANDOM.txt
+          git add -A
+          git -c user.name=GitHub -c user.email=noreply@github.com commit -m "Update"
+          git push
+          popd
