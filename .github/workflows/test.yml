@@ -23,5 +23,5 @@ jobs:
           popd
   
   build:
-    runs-on: ubuntu-latest
+    needs: random
     uses: Xzonn/Test/.github/workflows/build.yml@master
