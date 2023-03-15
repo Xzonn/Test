@@ -6,15 +6,23 @@ on:
       - test
 
 jobs:
-  build:
+  random:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          ref: master
+          fetch-depth: 1
+          path: master
       - run: |
-          git clone --depth=1 --branch=master --single-branch "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" master
           pushd master
           echo $RANDOM >> $RANDOM.txt
           git add -A
           git -c user.name=GitHub -c user.email=noreply@github.com commit -m "Update"
           git push
           popd
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ${{ github.repository }}/.github/workflows/publish.yml@master
