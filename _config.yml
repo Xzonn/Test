@@ -16,3 +16,10 @@ exclude:
   - "*.less"
   - "*.psd"
 repository: Xzonn/Test
+sass:
+  sass_dir: assets/css
+  load_paths: 
+    - assets/css
+    - node_modules/bootstrap/scss
+  sourcemap: always
+  style: compressed
