@@ -21,5 +21,5 @@ jobs:
           JEKYLL_ENV: aliyun
       - uses: actions/upload-artifact@v3
         with:
-          name: html
+          name: github-pages
           path: _site
