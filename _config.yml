@@ -23,3 +23,5 @@ sass:
     - node_modules/bootstrap/scss
   sourcemap: always
   style: compressed
+plugins:
+  - jekyll-readme-index

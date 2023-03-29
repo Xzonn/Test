@@ -1,6 +1,0 @@
----
-title: Hello, World!
----
-Hello world!
-
-Today is a good day!
