@@ -19,6 +19,6 @@ jobs:
           python script.py
       - continue-on-error: true
         run: |
-          export LANG=en_US.UTF-8
           python script.py
-        
+        env:
+          PYTHONUTF8: 1
