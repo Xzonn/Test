@@ -10,4 +10,5 @@ Server = https://pkg.devkitpro.org/packages
 Server = https://pkg.devkitpro.org/packages/windows/$arch/
 EOF
 pacman -Syu
+pacman -Sl dkp-libs
 pacman -S nds-dev
