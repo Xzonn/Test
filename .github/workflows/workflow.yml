@@ -11,14 +11,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-      - continue-on-error: true
+      - uses: msys2/setup-msys2@v2
+      - shell: msys2 {0}
         run: |
-          python script.py
-      - continue-on-error: true
-        run: |
-          python script.py
+          ./setup_dkp.sh
         env:
-          PYTHONUTF8: 1
+          DEVKITARM: /opt/devkitpro/devkitARM
+          DEVKITPPC: /opt/devkitpro/devkitPPC
+          DEVKITPRO: /opt/devkitpro
