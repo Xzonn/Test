@@ -1,0 +1,26 @@
+name: Download fonts
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  upload-simsun:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/upload-artifact@v4
+        with:
+          name: simsun
+          path: C:\Windows\Fonts\simsun.ttc
+          retention-days: 1
+
+  download-simsun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: simsun
+      - run: |
+          ls -alF
