@@ -6,6 +6,10 @@ on:
       - master
   workflow_dispatch:
 
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   upload-simsun:
     runs-on: windows-latest
@@ -17,6 +21,7 @@ jobs:
           retention-days: 1
 
   download-simsun:
+    needs: upload-simsun
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
