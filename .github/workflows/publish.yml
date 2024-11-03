@@ -1,0 +1,16 @@
+name: Build on push
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Building the app..."
+          echo "Version: $version"
+        env:
+          version: ${{ github.ref_name }}
