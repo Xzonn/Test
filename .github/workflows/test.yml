@@ -29,3 +29,4 @@ jobs:
           name: simsun
       - run: |
           ls -alF
+          gh release upload publish /flag -R Xzonn/Test --clobber
